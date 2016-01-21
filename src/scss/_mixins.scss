@@ -1,0 +1,17 @@
+@mixin clearfix {
+  &:before,
+  &:after {
+    content: ' ';
+    display: table;
+  }
+
+  &:after {
+    clear: both;
+  }
+}
+
+@mixin list-reset {
+  @extend %no-margin;
+  @extend %no-padding;
+  list-style: none;
+}

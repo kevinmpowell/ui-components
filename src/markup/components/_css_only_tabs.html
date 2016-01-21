@@ -1,0 +1,93 @@
+{% macro css_only_tabs(args) %}
+  {% block head %}
+    <link rel="stylesheet" href="css/components/css_only_tabs.css">
+  {% endblock %}
+  {% if args == undefined %}
+    {% set args = {
+      namespace: "ui-",
+      tabs_name: 'tabs--horizontal-sliding',
+      tabs: [
+        {
+          text: 'Tab 1',
+          id: 'tab-1',
+          value: 'first',
+          checked: true
+        },
+        {
+          text: 'Tab 2',
+          id: 'tab-2',
+          value: 'second'
+        },
+        {
+          text: 'Tab 3',
+          id: 'tab-3',
+          value: 'third'
+        },
+        {
+          text: 'Tab 4',
+          id: 'tab-4',
+          value: 'fourth'
+        },
+        {
+          text: 'Tab 5',
+          id: 'tab-5',
+          value: 'fifth'
+        },
+        {
+          text: 'Tab 6',
+          id: 'tab-6',
+          value: 'sixth'
+        },
+        {
+          text: 'Tab 7',
+          id: 'tab-7',
+          value: 'seventh'
+        },
+        {
+          text: 'Tab 8',
+          id: 'tab-8',
+          value: 'eighth'
+        },
+        {
+          text: 'Tab 9',
+          id: 'tab-9',
+          value: 'ninth'
+        },
+        {
+          text: 'Tab 10',
+          id: 'tab-10',
+          value: 'tenth'
+        }
+      ]
+    }
+    %}
+  {% endif %}
+  <div class="{{args.namespace}}tabs">
+    <div class="{{args.namespace}}tabs__tab-wrap">
+      {% for tab in args.tabs %}
+        <section class="{{args.namespace}}tabs__tab">
+          <input class="{{args.namespace}}tabs__radio-input" type="radio" id="{{tab.id}}" name="{{args.namespace}}{{args.tabs_name}}" value="{{tab.id}}" {{ 'checked' if tab.checked }}>
+          <label class="{{args.namespace}}tabs__label" for="{{tab.id}}">{{tab.text}}</label>
+          <div class="{{args.namespace}}tabs__panel">
+            <div class="{{args.namespace}}tabs__content">
+              {% if caller and loop.index == 1 %}
+                {{ caller() }}
+              {% else %}
+                <h1>Tab {{ loop.index }} Content</h1>
+                <p>
+                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptas impedit alias, doloribus quibusdam amet magni id veniam a officia quod repudiandae consequuntur deleniti optio, placeat quisquam recusandae vero rerum eos.
+                </p>
+                <p>
+                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptas impedit alias, doloribus quibusdam amet magni id veniam a officia quod repudiandae consequuntur deleniti optio, placeat quisquam recusandae vero rerum eos.
+                </p>
+                <p>
+                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptas impedit alias, doloribus quibusdam amet magni id veniam a officia quod repudiandae consequuntur deleniti optio, placeat quisquam recusandae vero rerum eos.
+                </p>
+              {% endif %}
+            </div>
+          </div>
+        </section>
+      {% endfor %}
+    </div>
+  </div>
+{% endmacro %}

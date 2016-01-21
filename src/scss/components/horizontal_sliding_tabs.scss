@@ -1,0 +1,182 @@
+@import '../mixins';
+
+$font-family: 'Arial', 'Helvetica', sans-serif;
+$border-color: #000000;
+$border-width: 1px;
+$color-scroll-button-background: #FFFFFF;
+$color-scroll-button-background-hover: #CCCCCC;
+$color-scroll-button-border: $border-color;
+$tab-content-background-color: #FFFFFF;
+$spacing-between-tabs: 10px;
+$font-size-tabs: 16px;
+$font-size-content: 16px;
+$tab-padding: 2px 6px;
+$content-padding: 10px 6px;
+$tab-min-height: 40px;
+$tab-min-width: 40px;
+
+.ui-tabs {
+  @include clearfix;
+  box-sizing: border-box;
+  // margin-bottom: $spacing-component-bottom;
+  font-family: $font-family;
+  position: relative;
+  z-index: 1;
+
+  *,
+  *:before,
+  *:after {
+    box-sizing: inherit;
+  }
+}
+
+.ui-tabs__tab-wrap {
+  max-width: 100%;
+  overflow: hidden;
+}
+
+.ui-tabs__tab {
+  display: inline;
+  font-size: 0;
+}
+
+.ui-tabs__sliding-tabs {
+  display: none;
+  font-size: 0;
+  position: relative;
+  white-space: nowrap;
+
+  .ui-tabs--horizontal-sliding-active & {
+    display: block;
+  }
+}
+
+.ui-tabs__sliding-tabs-inner {
+  // border-bottom: solid 1px red;
+  max-width: 100%;
+  overflow: hidden;
+  position: relative;
+  top: 1px;
+  transition: padding .2s;
+  z-index: 5;
+
+  .ui-tabs--allow-scrolling & {
+    // Enable swipeable scrolling on touch devices - triggered by Modernizr
+    -webkit-overflow-scrolling: touch;
+    overflow-x: scroll;
+  }
+}
+
+.ui-tabs__sliding-tabs-scroll-button {
+  background: $color-scroll-button-background;
+  border-color: $color-scroll-button-border;
+  border-style: solid;
+  border-width: 0;
+  display: block;
+  font-size: $font-size-content;
+  left: 0;
+  line-height: $tab-min-height;
+  min-height: $tab-min-height;
+  min-width: 0;
+  overflow: hidden;
+  position: absolute;
+  text-align: center;
+  text-decoration: none;
+  top: 0;
+  transition: border-color .2s, width .2s;
+  width: 0;
+  z-index: 10;
+
+  &:hover {
+    background: $color-scroll-button-background-hover;
+  }
+
+  .ui-tabs--allow-scrolling & {
+    display: none;
+  }
+}
+
+.ui-tabs__sliding-tabs--show-prev-button .ui-tabs__sliding-tabs-scroll-button--prev,
+.ui-tabs__sliding-tabs--show-next-button .ui-tabs__sliding-tabs-scroll-button--next {
+  border-color: rgba($color-scroll-button-border, 1);
+  border-width: 1px;
+  min-width: $tab-min-height;
+  width: $tab-min-height;
+}
+
+.ui-tabs__sliding-tabs-scroll-button--next {
+  left: auto;
+  right: 0;
+}
+
+.ui-tabs__sliding-tab-label,
+.ui-tabs__label {
+  border: solid $border-width transparent;
+  cursor: pointer;
+  display: inline-block;
+  font-size: $font-size-tabs;
+  line-height: $tab-min-height;
+  margin-right: $spacing-between-tabs;
+  min-height: $tab-min-height;
+  min-width: $tab-min-width;
+  padding: $tab-padding;
+  position: relative;
+  text-align: center;
+  vertical-align: bottom;
+  z-index: 10;
+
+  &:last-child {
+    margin-right: 0;
+  }
+}
+
+.ui-tabs--horizontal-sliding-active .ui-tabs__label {
+  display: none;
+}
+
+.ui-tabs__radio-input {
+  clip: rect(0 0 0 0);
+  opacity: 0;
+  position: fixed;
+  z-index: -1;
+}
+
+.ui-tabs__panel {
+  display: inline-block;
+  height: 0;
+  overflow: hidden;
+  position: relative;
+  width: 0;
+}
+
+.ui-tabs__content {
+  background: $tab-content-background-color;
+  border: solid $border-width $border-color;
+  display: block;
+  float: left;
+  font-size: $font-size-content;
+  padding: $content-padding;
+  position: relative;
+  top: -($border-width);
+  white-space: normal;
+  width: 100%;
+  z-index: 0;
+
+  .ui-tabs--horizontal-sliding-active & {
+    top: 0;
+  }
+}
+
+.ui-tabs__sliding-tab-label--active {
+  border-color: $border-color $border-color $tab-content-background-color;  
+}
+
+.ui-tabs__radio-input:checked {
+  + .ui-tabs__label {
+    border-color: $border-color $border-color $tab-content-background-color;
+  }
+
+  ~ .ui-tabs__panel {
+    display: inline;
+  }
+}
