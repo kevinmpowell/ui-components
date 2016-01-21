@@ -44,8 +44,9 @@ function set_scroll_button_visibility($tabset) {
   }
 }
 
-function scroll_active_tab_into_view($tabset) {
-  var $active_tab = $tabset.find("." + sliding_tab_active_class),
+function scroll_active_tab_into_view($tabset, animate) {
+  var animate = animate == undefined ? false : animate,
+      $active_tab = $tabset.find("." + sliding_tab_active_class),
       active_tab_left = $active_tab.position().left,
       active_tab_width = $active_tab.outerWidth(),
       active_tab_right = active_tab_left + active_tab_width,
@@ -56,18 +57,26 @@ function scroll_active_tab_into_view($tabset) {
       scroll_position;
 
   if (active_tab_left < prev_btn_width) {
-    $tabs.removeClass(namespace + "tabs__sliding-tabs--show-prev-button");
+    // $tabs.removeClass(namespace + "tabs__sliding-tabs--show-prev-button");
     scroll_position = 0;
   }
   else if ((active_tab_left - prev_btn_width) > max_scroll) {
     // Scroll the whole way and hide the next btn
-    $tabs.removeClass(namespace + "tabs__sliding-tabs--show-next-button");
+    // $tabs.removeClass(namespace + "tabs__sliding-tabs--show-next-button");
     scroll_position = max_scroll;
   }
   else {
     scroll_position = active_tab_left - prev_btn_width;
   }
-  $tabset.scrollLeft(scroll_position);
+
+  if (animate) {
+    $tabset.animate({scrollLeft:scroll_position}, 1000, function(){
+      set_scroll_button_visibility($tabset);
+    });
+  }
+  else {
+    $tabset.scrollLeft(scroll_position);
+  }
 }
 
 function get_aggregate_width($objects) {
@@ -78,8 +87,9 @@ function get_aggregate_width($objects) {
   return width;
 }
 
-function set_horizontal_tab_state($tabset) {
-  var single_line_tab_width = $tabset.attr(tab_width_data_attribute),
+function set_horizontal_tab_state($tabset, animate) {
+  var animate = animate == undefined ? false : animate,
+      single_line_tab_width = $tabset.attr(tab_width_data_attribute),
       tabset_width = $tabset.outerWidth(),
       margin_of_error = 5;
 
@@ -93,7 +103,7 @@ function set_horizontal_tab_state($tabset) {
 
     $sliding_tabset_inner.find("label[for='" + active_tab_id + "']").addClass(sliding_tab_active_class);
     set_scroll_button_visibility($sliding_tabset_inner);
-    scroll_active_tab_into_view($sliding_tabset_inner);
+    scroll_active_tab_into_view($sliding_tabset_inner, animate);
   }
   else {
     // No horizontal scrolling
@@ -106,7 +116,7 @@ $(document).ready(function(){
     var single_line_tab_width = get_aggregate_width($(this).find("." + namespace + "tabs__label"));
     $(this).attr(tab_width_data_attribute, single_line_tab_width);
 
-    set_horizontal_tab_state($(this));
+    set_horizontal_tab_state($(this), true);
     set_scroll_button_visibility($(this).find("." + namespace + "tabs__sliding-tabs-inner"));
 
     if (Modernizr.touchevents) {

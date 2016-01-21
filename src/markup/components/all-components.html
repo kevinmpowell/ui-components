@@ -105,6 +105,7 @@
         {
           text: 'Tab 1',
           id: 'tab-1',
+          checked: true,
           value: 'first'
         },
         {
@@ -120,8 +121,7 @@
         {
           text: 'Tab 4',
           id: 'tab-4',
-          value: 'fourth',
-          checked: true
+          value: 'fourth'
         },
         {
           text: 'Tab 5',
@@ -175,8 +175,8 @@
           <label class="{{args.namespace}}tabs__label" for="{{tab.id}}">{{tab.text}}</label>
           <div class="{{args.namespace}}tabs__panel">
             <div class="{{args.namespace}}tabs__content">
-              {% if caller and loop.index == 1 %}
-                {{ caller() }}
+              {% if tab.content %}
+                {{ tab.content | safe }}
               {% else %}
                 <h1>Tab {{ loop.index }} Content</h1>
                 <p>
