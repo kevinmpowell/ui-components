@@ -125,7 +125,6 @@ $(document).ready(function(){
   });
 
   $(window).resize(function(){
-    console.log("CHECKING");
     $("." + namespace + "tabs--horizontal-sliding").each(function(){
       set_horizontal_tab_state($(this));
     });
@@ -168,43 +167,18 @@ $(document).ready(function(){
     },100); 
   });
 
-  $("body").on('mouseup', function(){
+  $("." + namespace + "tabs__sliding-tabs-scroll-button").on('click', function(e){
+    e.preventDefault();
+  });
+
+  $("body").on('mouseup', function(e){
     clearInterval(mouseDownInterval);
   });
 
-  $("body").on('touchend', function(){
+  $("body").on('touchend', function(e){
     clearInterval(mouseDownInterval);
   });
 });
-
-
-(function($,sr){
-
-  // debouncing function from John Hann
-  // http://unscriptable.com/index.php/2009/03/20/debouncing-javascript-methods/
-  var debounce = function (func, threshold, execAsap) {
-      var timeout;
-
-      return function debounced () {
-          var obj = this, args = arguments;
-          function delayed () {
-              if (!execAsap)
-                  func.apply(obj, args);
-              timeout = null;
-          };
-
-          if (timeout)
-              clearTimeout(timeout);
-          else if (execAsap)
-              func.apply(obj, args);
-
-          timeout = setTimeout(delayed, threshold || 100);
-      };
-  }
-  // smartresize 
-  jQuery.fn[sr] = function(fn){  return fn ? this.bind('resize', debounce(fn)) : this.trigger(sr); };
-
-})(jQuery,'smartresize');
 
 /*! modernizr 3.3.1 (Custom Build) | MIT *
  * http://modernizr.com/download/?-touchevents-setclasses !*/
