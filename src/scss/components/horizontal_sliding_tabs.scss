@@ -131,6 +131,18 @@ $spacing-bottom-margin: 40px;
   &:last-child {
     margin-right: 0;
   }
+
+  &:after {
+    background: $tab-content-background-color;
+    bottom: -4px;
+    content: '';
+    display: none;
+    height: 5px;
+    left: 0;
+    position: absolute;
+    right: 0;
+    z-index: 100;
+  }
 }
 
 .ui-tabs--horizontal-sliding-active .ui-tabs__label {
@@ -172,16 +184,9 @@ $spacing-bottom-margin: 40px;
 
 .ui-tabs__sliding-tab-label--active {
   border-color: $border-color;
-  
+
   &:after {
-    background: $tab-content-background-color;
-    bottom: -4px;
-    content: '';
-    height: 5px;
-    left: 0;
-    position: absolute;
-    right: 0;
-    z-index: 100;
+    display: block;
   }
 }
 
@@ -190,14 +195,7 @@ $spacing-bottom-margin: 40px;
     border-color: $border-color;
     
     &:after {
-      background: $tab-content-background-color;
-      bottom: -4px;
-      content: '';
-      height: 5px;
-      left: 0;
-      position: absolute;
-      right: 0;
-      z-index: 100;
+      display: block;
     }
   }
 
