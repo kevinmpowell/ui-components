@@ -1,75 +1,75 @@
-{% import "all-components.html" as components %}
-<html>
-  <head>
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <meta name="viewport" content="width=device-width, minimum-scale=1.0" />
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
-    {% block head %}{% endblock %}
-  </head>
-  <body>
-    <h1>Hello World</h1>
-    {{ components.horizontal_sliding_tabs() }}
-    {{ components.horizontal_sliding_tabs({
-        namespace: "ui-",
-        tabs_name: 'tabs--horizontal-sliding-test-2',
-        tabs: [
-          {
-            text: 'Serial Numbers',
-            id: 'serial-numbers',
-            value: 'serial numbers',
-            content: '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem ex nobis laborum reprehenderit sunt illo nulla accusamus illum aperiam, est quis asperiores dolorum quod ab unde dicta quisquam, veritatis perferendis.</p>'
-          },
-          {
-            text: 'Support',
-            id: 'support',
-            value: 'support',
-            content: '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Suscipit at temporibus dicta earum reprehenderit praesentium officia, voluptatem hic quidem maxime assumenda ratione ex, magnam excepturi impedit natus soluta optio eligendi.</p><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iste deserunt inventore dolorum commodi fugiat. Maiores dolore, iusto facilis veniam, saepe sunt temporibus nesciunt voluptate magnam similique mollitia quam itaque provident.</p>'
-          },
-          {
-            text: 'Serial Numbers',
-            id: 'serial-numbers2',
-            value: 'serial numbers',
-            content: '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem ex nobis laborum reprehenderit sunt illo nulla accusamus illum aperiam, est quis asperiores dolorum quod ab unde dicta quisquam, veritatis perferendis.</p>'
-          },
-          {
-            text: 'Serial Numbers',
-            id: 'serial-numbers3',
-            value: 'serial numbers',
-            content: '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem ex nobis laborum reprehenderit sunt illo nulla accusamus illum aperiam, est quis asperiores dolorum quod ab unde dicta quisquam, veritatis perferendis.</p>'
-          },
-          {
-            text: 'Serial Numbers',
-            id: 'serial-numbers4',
-            value: 'serial numbers',
-            content: '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem ex nobis laborum reprehenderit sunt illo nulla accusamus illum aperiam, est quis asperiores dolorum quod ab unde dicta quisquam, veritatis perferendis.</p>'
-          },
-          {
-            text: 'Serial Numbers 5',
-            id: 'serial-numbers5',
-            value: 'serial numbers',
-            checked: true,
-            content: '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem ex nobis laborum reprehenderit sunt illo nulla accusamus illum aperiam, est quis asperiores dolorum quod ab unde dicta quisquam, veritatis perferendis.</p>'
-          },
-          {
-            text: 'Serial Numbers',
-            id: 'serial-numbers6',
-            value: 'serial numbers',
-            content: '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem ex nobis laborum reprehenderit sunt illo nulla accusamus illum aperiam, est quis asperiores dolorum quod ab unde dicta quisquam, veritatis perferendis.</p>'
-          },
-          {
-            text: 'Serial Numbers',
-            id: 'serial-numbers7',
-            value: 'serial numbers',
-            content: '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem ex nobis laborum reprehenderit sunt illo nulla accusamus illum aperiam, est quis asperiores dolorum quod ab unde dicta quisquam, veritatis perferendis.</p>'
-          },
-          {
-            text: 'Serial Numbers 8',
-            id: 'serial-numbers8',
-            value: 'serial numbers',
-            content: '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem ex nobis laborum reprehenderit sunt illo nulla accusamus illum aperiam, est quis asperiores dolorum quod ab unde dicta quisquam, veritatis perferendis.</p>'
-          }
-      ]
-    }) }}
-  </body>
-</html>
+{% extends 'default.layout.html' %}
+
+
+{% block content %}
+  {% if component_assets == undefined %}
+    {% set component_assets = '' %}
+  {% endif %}
+  {% set component_assets = component_assets + components.horizontal_sliding_tabs_assets() %}
+  {% set component_assets = component_assets + components.more_menu_tabs_assets() %}
+  
+  <h1>Hello World</h1>
+  {{ components.more_menu_tabs() }}
+  {{ components.horizontal_sliding_tabs() }}
+  {{ components.horizontal_sliding_tabs({
+      namespace: "ui-",
+      tabs_name: 'tabs--horizontal-sliding-test-2',
+      tabs: [
+        {
+          text: 'Serial Numbers',
+          id: 'serial-numbers',
+          value: 'serial numbers',
+          content: '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem ex nobis laborum reprehenderit sunt illo nulla accusamus illum aperiam, est quis asperiores dolorum quod ab unde dicta quisquam, veritatis perferendis.</p>'
+        },
+        {
+          text: 'Support',
+          id: 'support',
+          value: 'support',
+          content: '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Suscipit at temporibus dicta earum reprehenderit praesentium officia, voluptatem hic quidem maxime assumenda ratione ex, magnam excepturi impedit natus soluta optio eligendi.</p><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iste deserunt inventore dolorum commodi fugiat. Maiores dolore, iusto facilis veniam, saepe sunt temporibus nesciunt voluptate magnam similique mollitia quam itaque provident.</p>'
+        },
+        {
+          text: 'Serial Numbers',
+          id: 'serial-numbers2',
+          value: 'serial numbers',
+          content: '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem ex nobis laborum reprehenderit sunt illo nulla accusamus illum aperiam, est quis asperiores dolorum quod ab unde dicta quisquam, veritatis perferendis.</p>'
+        },
+        {
+          text: 'Serial Numbers',
+          id: 'serial-numbers3',
+          value: 'serial numbers',
+          content: '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem ex nobis laborum reprehenderit sunt illo nulla accusamus illum aperiam, est quis asperiores dolorum quod ab unde dicta quisquam, veritatis perferendis.</p>'
+        },
+        {
+          text: 'Serial Numbers',
+          id: 'serial-numbers4',
+          value: 'serial numbers',
+          content: '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem ex nobis laborum reprehenderit sunt illo nulla accusamus illum aperiam, est quis asperiores dolorum quod ab unde dicta quisquam, veritatis perferendis.</p>'
+        },
+        {
+          text: 'Serial Numbers 5',
+          id: 'serial-numbers5',
+          value: 'serial numbers',
+          checked: true,
+          content: '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem ex nobis laborum reprehenderit sunt illo nulla accusamus illum aperiam, est quis asperiores dolorum quod ab unde dicta quisquam, veritatis perferendis.</p>'
+        },
+        {
+          text: 'Serial Numbers',
+          id: 'serial-numbers6',
+          value: 'serial numbers',
+          content: '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem ex nobis laborum reprehenderit sunt illo nulla accusamus illum aperiam, est quis asperiores dolorum quod ab unde dicta quisquam, veritatis perferendis.</p>'
+        },
+        {
+          text: 'Serial Numbers',
+          id: 'serial-numbers7',
+          value: 'serial numbers',
+          content: '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem ex nobis laborum reprehenderit sunt illo nulla accusamus illum aperiam, est quis asperiores dolorum quod ab unde dicta quisquam, veritatis perferendis.</p>'
+        },
+        {
+          text: 'Serial Numbers 8',
+          id: 'serial-numbers8',
+          value: 'serial numbers',
+          content: '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem ex nobis laborum reprehenderit sunt illo nulla accusamus illum aperiam, est quis asperiores dolorum quod ab unde dicta quisquam, veritatis perferendis.</p>'
+        }
+    ]
+  }) }}
+{% endblock %}

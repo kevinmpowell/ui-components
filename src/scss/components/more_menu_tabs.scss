@@ -1,0 +1,124 @@
+@import '../mixins';
+
+$font-family: 'Arial', 'Helvetica', sans-serif;
+$color-border: #000000;
+$color-tab-content-background: #FFFFFF;
+$color-more-menu-background: #FFFFFF;
+$color-more-menu-list-item-hover-background: #CCCCCC;
+$border-width: 1px;
+$spacing-between-tabs: 10px;
+$font-size-tabs: 16px;
+$font-size-content: 16px;
+$padding-tab: 2px 6px;
+$padding-content: 10px 6px;
+$padding-more-menu-list-item: 2px 6px;
+$margin-component-bottom: 40px;
+$min-width-more-menu: 120px;
+
+.ui-more-menu-tabs {
+  @include clearfix;
+  box-sizing: border-box;
+  // margin-bottom: $spacing-component-bottom;
+  font-family: $font-family;
+  margin-bottom: $margin-component-bottom;
+  position: relative;
+  z-index: 1;
+
+  *,
+  *:before,
+  *:after {
+    box-sizing: inherit;
+  }
+}
+
+.ui-more-menu-tabs__tab {
+  display: inline;
+  font-size: 0;
+}
+
+.ui-more-menu-tabs__label {
+  border: solid $border-width transparent;
+  cursor: pointer;
+  display: inline-block;
+  font-size: $font-size-tabs;
+  margin-right: $spacing-between-tabs;
+  padding: $padding-tab;
+  position: relative;
+  text-align: center;
+  vertical-align: bottom;
+  z-index: 10;
+}
+
+.ui-more-menu-tabs__radio-input {
+  clip: rect(0 0 0 0);
+  opacity: 0;
+  position: fixed;
+  z-index: -1;
+}
+
+.ui-more-menu-tabs__panel {
+  display: inline-block;
+  height: 0;
+  overflow: hidden;
+  position: relative;
+  width: 0;
+}
+
+.ui-more-menu-tabs__content {
+  background: $color-tab-content-background;
+  border: solid $border-width $color-border;
+  display: block;
+  float: left;
+  font-size: $font-size-content;
+  padding: $padding-content;
+  position: relative;
+  top: -($border-width);
+  width: 100%;
+  z-index: 0;
+}
+
+.ui-more-menu-tabs__radio-input:checked {
+  + .ui-more-menu-tabs__label {
+    border-color: $color-border $color-border $color-tab-content-background;
+  }
+
+  ~ .ui-more-menu-tabs__panel {
+    display: inline;
+  }
+}
+
+.ui-more-menu-tabs__label--more {
+  position: relative;
+
+  .ui-more-menu-tabs--more-menu-visible & {
+    background: $color-more-menu-list-item-hover-background;
+  }
+}
+
+.ui-more-menu-tabs__more-menu {
+  background: $color-more-menu-background;
+  border: solid 1px $color-border;
+  display: none;
+  list-style: none;
+  margin: 0;
+  min-width: $min-width-more-menu;
+  padding: 0;
+  position: absolute;
+  right: 0;
+  text-align: left;
+  top: 100%;
+
+  .ui-more-menu-tabs--more-menu-visible & {
+    display: block;
+  }
+}
+
+.ui-more-menu-tabs__more-menu-list-item {
+  cursor: pointer;
+  display: block;
+  padding: $padding-more-menu-list-item;
+  
+  &:hover {
+    background: $color-more-menu-list-item-hover-background;
+  }
+}

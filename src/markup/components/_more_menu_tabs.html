@@ -1,87 +1,77 @@
-{% macro horizontal_sliding_tabs_assets() %}
-  <link rel="stylesheet" href="css/components/horizontal_sliding_tabs.css">
-  <script src="js/components/horizontal_sliding_tabs.js"></script>
+{% macro more_menu_tabs_assets() %}
+  <link rel="stylesheet" href="css/components/more_menu_tabs.css">
+  <script src="js/components/more_menu_tabs.js"></script>
 {% endmacro %}
 
-{% macro horizontal_sliding_tabs(args) %}
+{% macro more_menu_tabs(args) %}
   {% if args == undefined %}
     {% set args = {
       namespace: "ui-",
-      tabs_name: 'tabs--horizontal-sliding',
+      tabs_name: 'tabs--more-menu',
       tabs: [
         {
           text: 'Tab 1',
-          id: 'tab-1',
+          id: 'mm-tab-1',
           checked: true,
           value: 'first'
         },
         {
           text: 'Tab 2',
-          id: 'tab-2',
+          id: 'mm-tab-2',
           value: 'second'
         },
         {
           text: 'Tab 3',
-          id: 'tab-3',
+          id: 'mm-tab-3',
           value: 'third'
         },
         {
           text: 'Tab 4',
-          id: 'tab-4',
+          id: 'mm-tab-4',
           value: 'fourth'
         },
         {
           text: 'Tab 5',
-          id: 'tab-5',
+          id: 'mm-tab-5',
           value: 'fifth'
         },
         {
           text: 'Tab 6',
-          id: 'tab-6',
+          id: 'mm-tab-6',
           value: 'sixth'
         },
         {
           text: 'Tab 7',
-          id: 'tab-7',
+          id: 'mm-tab-7',
           value: 'seventh'
         },
         {
           text: 'Tab 8',
-          id: 'tab-8',
+          id: 'mm-tab-8',
           value: 'eighth'
         },
         {
           text: 'Tab 9',
-          id: 'tab-9',
+          id: 'mm-tab-9',
           value: 'ninth'
         },
         {
           text: 'Tab 10',
-          id: 'tab-10',
+          id: 'mm-tab-10',
           value: 'tenth'
         }
       ]
     }
     %}
   {% endif %}
-  <div class="{{args.namespace}}tabs {{args.namespace}}tabs--horizontal-sliding">
-    <div class="{{args.namespace}}tabs__sliding-tabs">
-      <a href="#" class="{{args.namespace}}tabs__sliding-tabs-scroll-button {{args.namespace}}tabs__sliding-tabs-scroll-button--prev">&lsaquo;</a>
-      
-      <div class="{{args.namespace}}tabs__sliding-tabs-inner">
-        {% for tab in args.tabs %}
-          <label for="{{tab.id}}" class="{{args.namespace}}tabs__sliding-tab-label">{{tab.text}}</label>
-        {% endfor %}
-      </div>
-      <a href="#" class="{{args.namespace}}tabs__sliding-tabs-scroll-button {{args.namespace}}tabs__sliding-tabs-scroll-button--next">&rsaquo;</a>
-    </div>
-    <div class="{{args.namespace}}tabs__tab-wrap">
+  <div class="{{args.namespace}}more-menu-tabs {{args.namespace}}more-menu-tabs--more-menu">
+    <div class="{{args.namespace}}more-menu-tabs__tab-wrap">
       {% for tab in args.tabs %}
-        <section class="{{args.namespace}}tabs__tab">
-          <input class="{{args.namespace}}tabs__radio-input" type="radio" id="{{tab.id}}" name="{{args.namespace}}{{args.tabs_name}}" value="{{tab.id}}" {{ 'checked' if tab.checked }}>
-          <label class="{{args.namespace}}tabs__label" for="{{tab.id}}">{{tab.text}}</label>
-          <div class="{{args.namespace}}tabs__panel">
-            <div class="{{args.namespace}}tabs__content">
+        <section class="{{args.namespace}}more-menu-tabs__tab">
+          <input class="{{args.namespace}}more-menu-tabs__radio-input" type="radio" id="{{tab.id}}" name="{{args.namespace}}{{args.tabs_name}}" value="{{tab.id}}" {{ 'checked' if tab.checked }}>
+          <label class="{{args.namespace}}more-menu-tabs__label" for="{{tab.id}}">{{tab.text}}</label>
+          <div class="{{args.namespace}}more-menu-tabs__panel">
+            <div class="{{args.namespace}}more-menu-tabs__content">
               {% if tab.content %}
                 {{ tab.content | safe }}
               {% else %}
@@ -100,6 +90,18 @@
           </div>
         </section>
       {% endfor %}
+      <section class="{{args.namespace}}more-menu-tabs__tab">
+        <label class="{{args.namespace}}more-menu-tabs__label {{args.namespace}}more-menu-tabs__label--more">
+          More
+          <ul class="{{args.namespace}}more-menu-tabs__more-menu">
+            {% for tab in args.tabs %}
+              <li>
+                <label class="{{args.namespace}}more-menu-tabs__more-menu-list-item" for="{{tab.id}}">{{tab.text}}</label>
+              </li>
+            {% endfor %}
+          </ul>
+        </label>
+      </section>
     </div>
   </div>
 {% endmacro %}
