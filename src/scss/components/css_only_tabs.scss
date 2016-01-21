@@ -9,6 +9,8 @@ $font-size-tabs: 16px;
 $font-size-content: 16px;
 $tab-padding: 2px 6px;
 $content-padding: 10px 6px;
+$tab-min-height: 40px;
+$tab-min-width: 40px;
 
 .ui-tabs {
   @include clearfix;
@@ -36,11 +38,25 @@ $content-padding: 10px 6px;
   display: inline-block;
   font-size: $font-size-tabs;
   margin-right: $spacing-between-tabs;
+  min-height: $tab-min-height;
+  min-width: $tab-min-width;
   padding: $tab-padding;
   position: relative;
   text-align: center;
   vertical-align: bottom;
   z-index: 10;
+
+  &:after {
+    background: $tab-content-background-color;
+    bottom: -4px;
+    content: '';
+    display: none;
+    height: 5px;
+    left: 0;
+    position: absolute;
+    right: 0;
+    z-index: 100;
+  }
 }
 
 .ui-tabs__radio-input {
@@ -73,7 +89,11 @@ $content-padding: 10px 6px;
 
 .ui-tabs__radio-input:checked {
   + .ui-tabs__label {
-    border-color: $border-color $border-color $tab-content-background-color;
+    border-color: $border-color;
+
+    &:after {
+      display: block;
+    }
   }
 
   ~ .ui-tabs__panel {

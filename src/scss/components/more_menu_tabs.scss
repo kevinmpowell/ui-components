@@ -14,6 +14,8 @@ $padding-content: 10px 6px;
 $padding-more-menu-list-item: 2px 6px;
 $margin-component-bottom: 40px;
 $min-width-more-menu: 120px;
+$tab-min-height: 40px;
+$tab-min-width: 40px;
 
 .ui-more-menu-tabs {
   @include clearfix;
@@ -41,12 +43,27 @@ $min-width-more-menu: 120px;
   cursor: pointer;
   display: inline-block;
   font-size: $font-size-tabs;
+  line-height: $tab-min-height;
   margin-right: $spacing-between-tabs;
+  min-height: $tab-min-height;
+  min-width: $tab-min-width;
   padding: $padding-tab;
   position: relative;
   text-align: center;
   vertical-align: bottom;
   z-index: 10;
+
+  &:after {
+    background: $color-tab-content-background;
+    bottom: -($border-width);
+    content: '';
+    display: none;
+    height: $border-width;
+    left: 0;
+    position: absolute;
+    right: 0;
+    z-index: 100;
+  }
 }
 
 .ui-more-menu-tabs__radio-input {
@@ -79,7 +96,11 @@ $min-width-more-menu: 120px;
 
 .ui-more-menu-tabs__radio-input:checked {
   + .ui-more-menu-tabs__label {
-    border-color: $color-border $color-border $color-tab-content-background;
+    border-color: $color-border;
+
+    &:after {
+      display: block;
+    }
   }
 
   ~ .ui-more-menu-tabs__panel {
@@ -87,11 +108,28 @@ $min-width-more-menu: 120px;
   }
 }
 
+.ui-more-menu-tabs__more-menu-label--selected {
+  border-color: $color-border;
+
+  &:after {
+    display: block;
+  }
+}
+
 .ui-more-menu-tabs__label--more {
+  display: none;
   position: relative;
 
   .ui-more-menu-tabs--more-menu-visible & {
     background: $color-more-menu-list-item-hover-background;
+
+    &:after {
+      background: $color-more-menu-list-item-hover-background;
+    }
+  }
+
+  .ui-more-menu-tabs__more-menu-label--visible & {
+    display: inline-block;
   }
 }
 
@@ -104,7 +142,7 @@ $min-width-more-menu: 120px;
   min-width: $min-width-more-menu;
   padding: 0;
   position: absolute;
-  right: 0;
+  right: -($border-width);
   text-align: left;
   top: 100%;
 
@@ -115,10 +153,19 @@ $min-width-more-menu: 120px;
 
 .ui-more-menu-tabs__more-menu-list-item {
   cursor: pointer;
-  display: block;
+  display: none;
   padding: $padding-more-menu-list-item;
-  
-  &:hover {
+
+  &:hover,
+  &.ui-more-menu-tabs__more-menu-list-item--selected {  
     background: $color-more-menu-list-item-hover-background;
   }
+
+  &.ui-more-menu-tabs__more-menu-list-item--visible {
+    display: block;
+  }
+}
+
+.ui-more-menu-tabs__label--hidden {
+  display: none;
 }

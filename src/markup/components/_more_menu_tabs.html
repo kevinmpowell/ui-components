@@ -93,13 +93,11 @@
       <section class="{{args.namespace}}more-menu-tabs__tab">
         <label class="{{args.namespace}}more-menu-tabs__label {{args.namespace}}more-menu-tabs__label--more">
           More
-          <ul class="{{args.namespace}}more-menu-tabs__more-menu">
+          <div class="{{args.namespace}}more-menu-tabs__more-menu">
             {% for tab in args.tabs %}
-              <li>
-                <label class="{{args.namespace}}more-menu-tabs__more-menu-list-item" for="{{tab.id}}">{{tab.text}}</label>
-              </li>
+              <label class="{{args.namespace}}more-menu-tabs__more-menu-list-item" for="{{tab.id}}">{{tab.text}}</label>
             {% endfor %}
-          </ul>
+          </div>
         </label>
       </section>
     </div>
