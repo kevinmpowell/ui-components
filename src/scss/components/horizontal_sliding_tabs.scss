@@ -16,7 +16,7 @@ $tab-min-height: 40px;
 $tab-min-width: 40px;
 $spacing-bottom-margin: 40px;
 
-.ui-tabs {
+.ui-horizontal-sliding-tabs {
   @include clearfix;
   box-sizing: border-box;
   // margin-bottom: $spacing-component-bottom;
@@ -32,29 +32,29 @@ $spacing-bottom-margin: 40px;
   }
 }
 
-.ui-tabs__tab-wrap {
+.ui-horizontal-sliding-tabs__tab-wrap {
   max-width: 100%;
   overflow: hidden;
 }
 
-.ui-tabs__tab {
+.ui-horizontal-sliding-tabs__tab {
   display: inline;
   font-size: 0;
 }
 
-.ui-tabs__sliding-tabs {
+.ui-horizontal-sliding-tabs__sliding-tabs {
   display: none;
   font-size: 0;
   position: relative;
   white-space: nowrap;
   z-index: 10;
 
-  .ui-tabs--horizontal-sliding-active & {
+  .ui-horizontal-sliding-tabs--horizontal-sliding-active & {
     display: block;
   }
 }
 
-.ui-tabs__sliding-tabs-inner {
+.ui-horizontal-sliding-tabs__sliding-tabs-inner {
   // border-bottom: solid 1px red;
   max-width: 100%;
   overflow: hidden;
@@ -63,14 +63,14 @@ $spacing-bottom-margin: 40px;
   transition: padding .2s;
   z-index: 5;
 
-  .ui-tabs--allow-scrolling & {
+  .ui-horizontal-sliding-tabs--allow-scrolling & {
     // Enable swipeable scrolling on touch devices - triggered by Modernizr
     -webkit-overflow-scrolling: touch;
     overflow-x: scroll;
   }
 }
 
-.ui-tabs__sliding-tabs-scroll-button {
+.ui-horizontal-sliding-tabs__sliding-tabs-scroll-button {
   background: $color-scroll-button-background;
   border-color: $color-scroll-button-border;
   border-style: solid;
@@ -95,26 +95,26 @@ $spacing-bottom-margin: 40px;
     background: $color-scroll-button-background-hover;
   }
 
-  .ui-tabs--allow-scrolling & {
+  .ui-horizontal-sliding-tabs--allow-scrolling & {
     display: none;
   }
 }
 
-.ui-tabs__sliding-tabs--show-prev-button .ui-tabs__sliding-tabs-scroll-button--prev,
-.ui-tabs__sliding-tabs--show-next-button .ui-tabs__sliding-tabs-scroll-button--next {
+.ui-horizontal-sliding-tabs__sliding-tabs--show-prev-button .ui-horizontal-sliding-tabs__sliding-tabs-scroll-button--prev,
+.ui-horizontal-sliding-tabs__sliding-tabs--show-next-button .ui-horizontal-sliding-tabs__sliding-tabs-scroll-button--next {
   border-color: rgba($color-scroll-button-border, 1);
   border-width: 1px;
   min-width: $tab-min-height;
   width: $tab-min-height;
 }
 
-.ui-tabs__sliding-tabs-scroll-button--next {
+.ui-horizontal-sliding-tabs__sliding-tabs-scroll-button--next {
   left: auto;
   right: 0;
 }
 
-.ui-tabs__sliding-tab-label,
-.ui-tabs__label {
+.ui-horizontal-sliding-tabs__sliding-tab-label,
+.ui-horizontal-sliding-tabs__label {
   border: solid $border-width rgba($border-color, 0);
   cursor: pointer;
   display: inline-block;
@@ -146,18 +146,18 @@ $spacing-bottom-margin: 40px;
   }
 }
 
-.ui-tabs--horizontal-sliding-active .ui-tabs__label {
+.ui-horizontal-sliding-tabs--horizontal-sliding-active .ui-horizontal-sliding-tabs__label {
   display: none;
 }
 
-.ui-tabs__radio-input {
+.ui-horizontal-sliding-tabs__radio-input {
   clip: rect(0 0 0 0);
   opacity: 0;
   position: fixed;
   z-index: -1;
 }
 
-.ui-tabs__panel {
+.ui-horizontal-sliding-tabs__panel {
   display: inline-block;
   height: 0;
   overflow: hidden;
@@ -165,7 +165,7 @@ $spacing-bottom-margin: 40px;
   width: 0;
 }
 
-.ui-tabs__content {
+.ui-horizontal-sliding-tabs__content {
   background: $tab-content-background-color;
   border: solid $border-width $border-color;
   display: block;
@@ -178,12 +178,12 @@ $spacing-bottom-margin: 40px;
   width: 100%;
   z-index: 0;
 
-  .ui-tabs--horizontal-sliding-active & {
+  .ui-horizontal-sliding-tabs--horizontal-sliding-active & {
     top: 0;
   }
 }
 
-.ui-tabs__sliding-tab-label--active {
+.ui-horizontal-sliding-tabs__sliding-tab-label--active {
   border-color: $border-color;
 
   &:after {
@@ -191,8 +191,8 @@ $spacing-bottom-margin: 40px;
   }
 }
 
-.ui-tabs__radio-input:checked {
-  + .ui-tabs__label {
+.ui-horizontal-sliding-tabs__radio-input:checked {
+  + .ui-horizontal-sliding-tabs__label {
     border-color: $border-color;
     
     &:after {
@@ -200,7 +200,7 @@ $spacing-bottom-margin: 40px;
     }
   }
 
-  ~ .ui-tabs__panel {
+  ~ .ui-horizontal-sliding-tabs__panel {
     display: inline;
   }
 }

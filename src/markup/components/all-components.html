@@ -158,24 +158,24 @@
     }
     %}
   {% endif %}
-  <div class="{{args.namespace}}tabs {{args.namespace}}tabs--horizontal-sliding">
-    <div class="{{args.namespace}}tabs__sliding-tabs">
-      <a href="#" class="{{args.namespace}}tabs__sliding-tabs-scroll-button {{args.namespace}}tabs__sliding-tabs-scroll-button--prev">&lsaquo;</a>
+  <div class="{{args.namespace}}horizontal-sliding-tabs {{args.namespace}}horizontal-sliding-tabs--horizontal-sliding">
+    <div class="{{args.namespace}}horizontal-sliding-tabs__sliding-tabs">
+      <a href="#" class="{{args.namespace}}horizontal-sliding-tabs__sliding-tabs-scroll-button {{args.namespace}}horizontal-sliding-tabs__sliding-tabs-scroll-button--prev">&lsaquo;</a>
       
-      <div class="{{args.namespace}}tabs__sliding-tabs-inner">
+      <div class="{{args.namespace}}horizontal-sliding-tabs__sliding-tabs-inner">
         {% for tab in args.tabs %}
-          <label for="{{tab.id}}" class="{{args.namespace}}tabs__sliding-tab-label">{{tab.text}}</label>
+          <label for="{{tab.id}}" class="{{args.namespace}}horizontal-sliding-tabs__sliding-tab-label">{{tab.text}}</label>
         {% endfor %}
       </div>
-      <a href="#" class="{{args.namespace}}tabs__sliding-tabs-scroll-button {{args.namespace}}tabs__sliding-tabs-scroll-button--next">&rsaquo;</a>
+      <a href="#" class="{{args.namespace}}horizontal-sliding-tabs__sliding-tabs-scroll-button {{args.namespace}}horizontal-sliding-tabs__sliding-tabs-scroll-button--next">&rsaquo;</a>
     </div>
-    <div class="{{args.namespace}}tabs__tab-wrap">
+    <div class="{{args.namespace}}horizontal-sliding-tabs__tab-wrap">
       {% for tab in args.tabs %}
-        <section class="{{args.namespace}}tabs__tab">
-          <input class="{{args.namespace}}tabs__radio-input" type="radio" id="{{tab.id}}" name="{{args.namespace}}{{args.tabs_name}}" value="{{tab.id}}" {{ 'checked' if tab.checked }}>
-          <label class="{{args.namespace}}tabs__label" for="{{tab.id}}">{{tab.text}}</label>
-          <div class="{{args.namespace}}tabs__panel">
-            <div class="{{args.namespace}}tabs__content">
+        <section class="{{args.namespace}}horizontal-sliding-tabs__tab">
+          <input class="{{args.namespace}}horizontal-sliding-tabs__radio-input" type="radio" id="{{tab.id}}" name="{{args.namespace}}{{args.tabs_name}}" value="{{tab.id}}" {{ 'checked' if tab.checked }}>
+          <label class="{{args.namespace}}horizontal-sliding-tabs__label" for="{{tab.id}}">{{tab.text}}</label>
+          <div class="{{args.namespace}}horizontal-sliding-tabs__panel">
+            <div class="{{args.namespace}}horizontal-sliding-tabs__content">
               {% if tab.content %}
                 {{ tab.content | safe }}
               {% else %}
@@ -210,7 +210,7 @@
       tabs_name: 'tabs--more-menu',
       tabs: [
         {
-          text: 'Tab 1',
+          text: 'Long Tab Name Blah Blah Blah Blah Tab 1',
           id: 'mm-tab-1',
           checked: true,
           value: 'first'
@@ -290,9 +290,10 @@
           </div>
         </section>
       {% endfor %}
-      <section class="{{args.namespace}}more-menu-tabs__tab">
+      <section class="{{args.namespace}}more-menu-tabs__tab {{args.namespace}}more-menu-tabs__tab--more">
         <label class="{{args.namespace}}more-menu-tabs__label {{args.namespace}}more-menu-tabs__label--more">
-          More
+          <span class="{{args.namespace}}more-menu-tabs__label-text--more">More</span>
+          <span class="{{args.namespace}}more-menu-tabs__more-menu-dropdown-indicator">&#9660;</span>
           <div class="{{args.namespace}}more-menu-tabs__more-menu">
             {% for tab in args.tabs %}
               <label class="{{args.namespace}}more-menu-tabs__more-menu-list-item" for="{{tab.id}}">{{tab.text}}</label>

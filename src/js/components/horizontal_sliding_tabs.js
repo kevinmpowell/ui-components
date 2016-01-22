@@ -1,14 +1,14 @@
 var namespace = "ui-",
-    tab_width_data_attribute = "data-" + namespace + "tabs-horizontal-sliding-single-line-width",
-    sliding_tab_active_class = namespace + "tabs__sliding-tab-label--active",
-    allow_scrolling_class = namespace + "tabs--allow-scrolling",
+    tab_width_data_attribute = "data-" + namespace + "horizontal-sliding-tabs-horizontal-sliding-single-line-width",
+    sliding_tab_active_class = namespace + "horizontal-sliding-tabs__sliding-tab-label--active",
+    allow_scrolling_class = namespace + "horizontal-sliding-tabs--allow-scrolling",
     scroll_button_min_width = "40";
 
 
 function tab_scroll(direction, $tabset) {
     var distance = 30,
         current_scroll_position = $tabset.scrollLeft(),
-        max_scroll = $tabset[0].scrollWidth - ($tabset.closest("." + namespace + "tabs").outerWidth()),
+        max_scroll = $tabset[0].scrollWidth - ($tabset.closest("." + namespace + "horizontal-sliding-tabs").outerWidth()),
         new_scroll_position;
 
     if (direction == 'left') {
@@ -31,16 +31,16 @@ function tab_scroll(direction, $tabset) {
 
 function set_scroll_button_visibility($tabset) {
   var current_scroll_position = $tabset.scrollLeft(),
-      max_scroll = $tabset[0].scrollWidth - ($tabset.closest("." + namespace + "tabs").outerWidth()),
-      $tabs = $tabset.closest("." + namespace + "tabs");
+      max_scroll = $tabset[0].scrollWidth - ($tabset.closest("." + namespace + "horizontal-sliding-tabs").outerWidth()),
+      $tabs = $tabset.closest("." + namespace + "horizontal-sliding-tabs");
 
-  $tabs.removeClass(namespace + "tabs__sliding-tabs--show-prev-button " + namespace + "tabs__sliding-tabs--show-next-button");
+  $tabs.removeClass(namespace + "horizontal-sliding-tabs__sliding-tabs--show-prev-button " + namespace + "horizontal-sliding-tabs__sliding-tabs--show-next-button");
   if (current_scroll_position > 0) {
-    $tabs.addClass(namespace + "tabs__sliding-tabs--show-prev-button");
+    $tabs.addClass(namespace + "horizontal-sliding-tabs__sliding-tabs--show-prev-button");
   }
 
   if (current_scroll_position < max_scroll) {
-    $tabs.addClass(namespace + "tabs__sliding-tabs--show-next-button");
+    $tabs.addClass(namespace + "horizontal-sliding-tabs__sliding-tabs--show-next-button");
   }
 }
 
@@ -50,19 +50,19 @@ function scroll_active_tab_into_view($tabset, animate) {
       active_tab_left = $active_tab.position().left,
       active_tab_width = $active_tab.outerWidth(),
       active_tab_right = active_tab_left + active_tab_width,
-      $tabs = $tabset.closest("." + namespace + "tabs"),
-      prev_btn_width = $tabs.find("." + namespace + "tabs__sliding-tabs-scroll-button--prev").outerWidth(),
-      max_scroll = $tabset[0].scrollWidth - ($tabset.closest("." + namespace + "tabs").outerWidth()) + prev_btn_width,
+      $tabs = $tabset.closest("." + namespace + "horizontal-sliding-tabs"),
+      prev_btn_width = $tabs.find("." + namespace + "horizontal-sliding-tabs__sliding-tabs-scroll-button--prev").outerWidth(),
+      max_scroll = $tabset[0].scrollWidth - ($tabset.closest("." + namespace + "horizontal-sliding-tabs").outerWidth()) + prev_btn_width,
       prev_btn_width = prev_btn_width < scroll_button_min_width ? scroll_button_min_width : prev_btn_width,
       scroll_position;
 
   if (active_tab_left < prev_btn_width) {
-    // $tabs.removeClass(namespace + "tabs__sliding-tabs--show-prev-button");
+    // $tabs.removeClass(namespace + "horizontal-sliding-tabs__sliding-tabs--show-prev-button");
     scroll_position = 0;
   }
   else if ((active_tab_left - prev_btn_width) > max_scroll) {
     // Scroll the whole way and hide the next btn
-    // $tabs.removeClass(namespace + "tabs__sliding-tabs--show-next-button");
+    // $tabs.removeClass(namespace + "horizontal-sliding-tabs__sliding-tabs--show-next-button");
     scroll_position = max_scroll;
   }
   else {
@@ -95,10 +95,10 @@ function set_horizontal_tab_state($tabset, animate) {
 
   if (single_line_tab_width > (tabset_width - margin_of_error)) {
     // Yes horizontal scrolling
-    $tabset.addClass(namespace + "tabs--horizontal-sliding-active");
+    $tabset.addClass(namespace + "horizontal-sliding-tabs--horizontal-sliding-active");
     $tabset.find("." + sliding_tab_active_class).removeClass(sliding_tab_active_class);
 
-    var $sliding_tabset_inner = $tabset.find("." + namespace + "tabs__sliding-tabs-inner"),
+    var $sliding_tabset_inner = $tabset.find("." + namespace + "horizontal-sliding-tabs__sliding-tabs-inner"),
         active_tab_id = $tabset.find("input[type='radio']:checked").attr("id");
 
     $sliding_tabset_inner.find("label[for='" + active_tab_id + "']").addClass(sliding_tab_active_class);
@@ -107,17 +107,17 @@ function set_horizontal_tab_state($tabset, animate) {
   }
   else {
     // No horizontal scrolling
-    $tabset.removeClass(namespace + "tabs--horizontal-sliding-active");
+    $tabset.removeClass(namespace + "horizontal-sliding-tabs--horizontal-sliding-active");
   }
 }
 
 $(document).ready(function(){
-  $("." + namespace + "tabs--horizontal-sliding").each(function(){
-    var single_line_tab_width = get_aggregate_width($(this).find("." + namespace + "tabs__label"));
+  $("." + namespace + "horizontal-sliding-tabs--horizontal-sliding").each(function(){
+    var single_line_tab_width = get_aggregate_width($(this).find("." + namespace + "horizontal-sliding-tabs__label"));
     $(this).attr(tab_width_data_attribute, single_line_tab_width);
 
     set_horizontal_tab_state($(this), true);
-    set_scroll_button_visibility($(this).find("." + namespace + "tabs__sliding-tabs-inner"));
+    set_scroll_button_visibility($(this).find("." + namespace + "horizontal-sliding-tabs__sliding-tabs-inner"));
 
     if (Modernizr.touchevents) {
       $(this).addClass(allow_scrolling_class);
@@ -125,49 +125,49 @@ $(document).ready(function(){
   });
 
   $(window).resize(function(){
-    $("." + namespace + "tabs--horizontal-sliding").each(function(){
+    $("." + namespace + "horizontal-sliding-tabs--horizontal-sliding").each(function(){
       set_horizontal_tab_state($(this));
     });
   });
 
-  $("." + namespace + "tabs__sliding-tab-label").on("click", function(){
+  $("." + namespace + "horizontal-sliding-tabs__sliding-tab-label").on("click", function(){
     $(this).siblings("." + sliding_tab_active_class).removeClass(sliding_tab_active_class).end().addClass(sliding_tab_active_class);
   });
 
   var mouseDownInterval;
-  $("." + namespace + "tabs__sliding-tabs-scroll-button--prev").on('mousedown', function(e){
+  $("." + namespace + "horizontal-sliding-tabs__sliding-tabs-scroll-button--prev").on('mousedown', function(e){
     e.preventDefault();
-    var $tabset = $(this).siblings("." + namespace + "tabs__sliding-tabs-inner");
+    var $tabset = $(this).siblings("." + namespace + "horizontal-sliding-tabs__sliding-tabs-inner");
     mouseDownInterval = setInterval(function() {
         tab_scroll("left", $tabset);
     },100); 
   });
 
-  $("." + namespace + "tabs__sliding-tabs-scroll-button--prev").on('touchstart', function(e){
+  $("." + namespace + "horizontal-sliding-tabs__sliding-tabs-scroll-button--prev").on('touchstart', function(e){
     e.preventDefault();
-    var $tabset = $(this).siblings("." + namespace + "tabs__sliding-tabs-inner");
+    var $tabset = $(this).siblings("." + namespace + "horizontal-sliding-tabs__sliding-tabs-inner");
     mouseDownInterval = setInterval(function() {
         tab_scroll("left", $tabset);
     },100); 
   });
 
-  $("." + namespace + "tabs__sliding-tabs-scroll-button--next").on('mousedown', function(e){
+  $("." + namespace + "horizontal-sliding-tabs__sliding-tabs-scroll-button--next").on('mousedown', function(e){
     e.preventDefault();
-    var $tabset = $(this).siblings("." + namespace + "tabs__sliding-tabs-inner");
+    var $tabset = $(this).siblings("." + namespace + "horizontal-sliding-tabs__sliding-tabs-inner");
     mouseDownInterval = setInterval(function() {
         tab_scroll("right", $tabset);
     },100); 
   });
 
-  $("." + namespace + "tabs__sliding-tabs-scroll-button--next").on('touchstart', function(e){
+  $("." + namespace + "horizontal-sliding-tabs__sliding-tabs-scroll-button--next").on('touchstart', function(e){
     e.preventDefault();
-    var $tabset = $(this).siblings("." + namespace + "tabs__sliding-tabs-inner");
+    var $tabset = $(this).siblings("." + namespace + "horizontal-sliding-tabs__sliding-tabs-inner");
     mouseDownInterval = setInterval(function() {
         tab_scroll("right", $tabset);
     },100); 
   });
 
-  $("." + namespace + "tabs__sliding-tabs-scroll-button").on('click', function(e){
+  $("." + namespace + "horizontal-sliding-tabs__sliding-tabs-scroll-button").on('click', function(e){
     e.preventDefault();
   });
 

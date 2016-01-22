@@ -11,7 +11,7 @@ $font-size-tabs: 16px;
 $font-size-content: 16px;
 $padding-tab: 2px 6px;
 $padding-content: 10px 6px;
-$padding-more-menu-list-item: 2px 6px;
+$padding-more-menu-list-item: 6px 6px;
 $margin-component-bottom: 40px;
 $min-width-more-menu: 120px;
 $tab-min-height: 40px;
@@ -24,7 +24,7 @@ $tab-min-width: 40px;
   font-family: $font-family;
   margin-bottom: $margin-component-bottom;
   position: relative;
-  z-index: 1;
+  z-index: 10;
 
   *,
   *:before,
@@ -133,6 +133,15 @@ $tab-min-width: 40px;
   }
 }
 
+.ui-more-menu-tabs__more-menu-dropdown-indicator {
+  display: inline-block;
+  transition: transform .4s;
+
+  .ui-more-menu-tabs--more-menu-visible & {
+    transform: rotate(180deg);
+  } 
+}
+
 .ui-more-menu-tabs__more-menu {
   background: $color-more-menu-background;
   border: solid 1px $color-border;
@@ -154,6 +163,7 @@ $tab-min-width: 40px;
 .ui-more-menu-tabs__more-menu-list-item {
   cursor: pointer;
   display: none;
+  line-height: $font-size-tabs * 1.2;
   padding: $padding-more-menu-list-item;
 
   &:hover,
@@ -168,4 +178,59 @@ $tab-min-width: 40px;
 
 .ui-more-menu-tabs__label--hidden {
   display: none;
+}
+
+.ui-more-menu-tabs--all-tabs-hidden {
+  .ui-more-menu-tabs__label--more {
+    border: solid 1px $color-border;
+    bottom: auto;
+    display: block;
+    left: 0;
+    position: absolute;
+    text-align: left;
+    top: 0;
+    width: 100%;
+    
+    &:after {
+      display: none;
+    }
+  }
+
+  .ui-more-menu-tabs__more-menu {
+    left: -1px;
+    right: -1px;
+  }
+
+  .ui-more-menu-tabs__more-menu-dropdown-indicator {
+    bottom: 0;
+    min-width: $tab-min-width;
+    position: absolute;
+    right: 0;
+    text-align: center;
+    top: 0;
+  }
+
+  &.ui-more-menu-tabs--more-menu-visible .ui-more-menu-tabs__label-text--more:after {
+    display: none;
+  }
+
+  .ui-more-menu-tabs__label-text--more {
+    display: block;
+    overflow: hidden;
+    padding-right: 40px;
+    position: relative;
+    white-space: nowrap;
+    width: 100%;
+
+    
+    &:after {
+      background: linear-gradient(90deg, rgba($color-tab-content-background, 0), $color-tab-content-background 20%);
+      bottom: 0;
+      content: '';
+      position: absolute;
+      right: 0;
+      top: 0;
+      width: $tab-min-width;
+    }
+  }
 }

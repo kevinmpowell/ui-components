@@ -10,7 +10,7 @@
       tabs_name: 'tabs--more-menu',
       tabs: [
         {
-          text: 'Tab 1',
+          text: 'Long Tab Name Blah Blah Blah Blah Tab 1',
           id: 'mm-tab-1',
           checked: true,
           value: 'first'
@@ -90,9 +90,10 @@
           </div>
         </section>
       {% endfor %}
-      <section class="{{args.namespace}}more-menu-tabs__tab">
+      <section class="{{args.namespace}}more-menu-tabs__tab {{args.namespace}}more-menu-tabs__tab--more">
         <label class="{{args.namespace}}more-menu-tabs__label {{args.namespace}}more-menu-tabs__label--more">
-          More
+          <span class="{{args.namespace}}more-menu-tabs__label-text--more">More</span>
+          <span class="{{args.namespace}}more-menu-tabs__more-menu-dropdown-indicator">&#9660;</span>
           <div class="{{args.namespace}}more-menu-tabs__more-menu">
             {% for tab in args.tabs %}
               <label class="{{args.namespace}}more-menu-tabs__more-menu-list-item" for="{{tab.id}}">{{tab.text}}</label>
