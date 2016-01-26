@@ -7,9 +7,15 @@
   {% endif %}
   {% set component_assets = component_assets + components.horizontal_sliding_tabs_assets() %}
   {% set component_assets = component_assets + components.more_menu_tabs_assets() %}
+  {% set component_assets = component_assets + components.collision_proof_panel_assets() %}
+
+  <h1>Collision Proof Panel</h1>
+  {{ components.collision_proof_panel() }}
   
-  <h1>Hello World</h1>
+  <h1>More Menu Tabs (Responsive)</h1>
   {{ components.more_menu_tabs() }}
+  
+  <h1>Horizontal Scrolling Tabs (Responsive)</h1>
   {{ components.horizontal_sliding_tabs() }}
   {{ components.horizontal_sliding_tabs({
       namespace: "ui-",

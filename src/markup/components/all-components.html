@@ -1,3 +1,45 @@
+{% macro collision_proof_panel(args) %}
+  {% if args == undefined %}
+    {% set args = {
+      namespace: 'ui-'
+    } %}
+  {% endif %}
+  
+  <p>
+    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Blanditiis tempore itaque earum, fuga doloremque, accusantium officiis. Nobis dicta, dignissimos earum tenetur delectus non,   
+      <span class="{{args.namespace}}collision-proof-panel__target" data-reveal-panel-on="hover" data-panel-position="right" data-panel-id="test-panel">Target</span> nesciunt laudantium cupiditate quam qui veniam sit.
+  </p>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+
+  <p>
+    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Blanditiis tempore itaque earum, fuga doloremque, accusantium officiis. Nobis dicta, dignissimos earum tenetur delectus non,   
+      <span class="{{args.namespace}}collision-proof-panel__target" data-reveal-panel-on="click" data-panel-position="top" data-panel-id="test-panel-2">Target</span>
+      nesciunt laudantium cupiditate quam qui veniam sit.
+  </p>
+
+
+  <div id="test-panel" class="{{args.namespace}}collision-proof-panel">
+    <h1>Testing</h1>
+    <img src="http://placehold.it/100x100" alt="">
+  </div>
+
+  <div id="test-panel-2" class="{{args.namespace}}collision-proof-panel">
+    <h2>Test</h2>
+    <p>Lorem ipsum dolor sit amet.</p>
+  </div> 
+{% endmacro %}
+
+{% macro collision_proof_panel_assets() %}
+  <link rel="stylesheet" href="css/components/collision_proof_panel.css">
+  <script src="js/components/collision_proof_panel.js"></script>
+{% endmacro %}
+
 {% macro css_only_tabs(args) %}
   {% block head %}
     <link rel="stylesheet" href="css/components/css_only_tabs.css">
