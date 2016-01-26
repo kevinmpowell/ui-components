@@ -25,9 +25,10 @@ $panel-caret-size: 10px;
 
 .ui-collision-proof-panel__target {
   position: relative;
-  z-index: 101;
 
   &.ui-collision-proof-panel--visible {
+    z-index: 101;
+
     &:after,
     &:before {
       display: block;
