@@ -13,11 +13,12 @@ var cpp_namespace = "ui-",
     cpp_target_class = cpp_namespace + "collision-proof-panel__target",
     cpp_panel_visible_class = cpp_panel_class + "--visible";
 
-function position_cpps($target) {
-  var $targets = $target == undefined ? $("." + cpp_target_class) : $target;
+function position_cpps($target, hover_panel) {
+  var $targets = $target == undefined ? $("." + cpp_target_class) : $target,
+      hover_panel = hover_panel == undefined ? false : hover_panel;
   
   $targets.each(function(){
-    var $panel = $("#" + $(this).attr("data-panel-id")),
+    var $panel = hover_panel == true ? $("#" + $(this).attr("data-hover-panel-id")) : $("#" + $(this).attr("data-panel-id")),
         panel_position = $(this).attr("data-panel-position") == undefined ? 'top' : $(this).attr("data-panel-position"),
         panel_position_coordinates = "center bottom",
         target_position_coordinates = "center top-10",
@@ -97,6 +98,28 @@ $(document).ready(function(){
     }
   });
 
+  // When there's a need for different hover and click based panels
+  $("." + cpp_target_class +"[data-hover-panel-id]").on("mouseover", function(){
+    $("#" + $(this).attr("data-hover-panel-id")).addClass(cpp_panel_visible_class);
+    $(this).addClass(cpp_panel_visible_class);
+    position_cpps($(this), true);
+  });
+
+  $("." + cpp_target_class +"[data-hover-panel-id]").on("mouseout", function(){
+    $("#" + $(this).attr("data-hover-panel-id")).removeClass(cpp_panel_visible_class);
+    var $click_panel = $("#" + $(this).attr("data-panel-id"));
+    if (!$click_panel.hasClass(cpp_panel_visible_class)) {
+      $(this).removeClass(cpp_panel_visible_class);
+    }
+  });
+
+  $("." + cpp_target_class +"[data-hover-panel-id]").on("click", function(){
+    $("#" + $(this).attr("data-hover-panel-id")).removeClass(cpp_panel_visible_class);
+    $(this).removeClass(cpp_panel_visible_class);
+  });
+
+
+  // Regular hover and click panels
   $("." + cpp_target_class +"[data-reveal-panel-on='hover']").on("mouseover", function(){
     $("#" + $(this).attr("data-panel-id")).addClass(cpp_panel_visible_class);
     $(this).addClass(cpp_panel_visible_class);
@@ -108,7 +131,9 @@ $(document).ready(function(){
     $(this).removeClass(cpp_panel_visible_class);
   });
 
-  $("." + cpp_target_class +"[data-reveal-panel-on='click']").on("click", function(){
+  $("." + cpp_target_class +"[data-reveal-panel-on='click']").on("click", function(e){
+    e.preventDefault();
+    
     if ($("#" + $(this).attr("data-panel-id")).hasClass(cpp_panel_visible_class)) {
       $("#" + $(this).attr("data-panel-id")).removeClass(cpp_panel_visible_class);
       $(this).removeClass(cpp_panel_visible_class);
